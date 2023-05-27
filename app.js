@@ -275,4 +275,47 @@ document.addEventListener("DOMContentLoaded", () => {
       result.innerHTML = "Run out of times to use Extra 1";
     }
   };
+  // function extra 2
+  extra2.onclick = function extra2(){
+    if(timesExtra2 > 0){
+      checkingExtra2 = true
+      console.log(checkingExtra2);
+      timesExtra2 -= 1
+    }else{
+      result.innerHTML = 'run out of times of Extra2'
+    }
+    
+  }
+  // click function for Extra 2 
+  function clickExtra2(square) {
+    let currentId = parseInt(square.id)
+    const isLeftEdge = (currentId % width === 0)
+    const isRightEdge = (currentId % width === width - 1)
+    console.log(currentId);
+    if (squares[currentId].classList.contains('bomb'))                                                                     {addFlagExtra2(squares[currentId])}
+    if (currentId > 0 && !isLeftEdge && squares[currentId - 1].classList.contains('bomb'))                                {addFlagExtra2(squares[currentId - 1])}
+    if (currentId > (width-1) && !isRightEdge && squares[currentId + 1 - width].classList.contains('bomb'))               {addFlagExtra2(squares[currentId + 1 - width])}
+    if (currentId > width && squares[currentId - width].classList.contains('bomb'))                                       {addFlagExtra2(squares[currentId - width])}
+    if (currentId > (width+1) && !isLeftEdge && squares[currentId - 1 - width].classList.contains('bomb'))                {addFlagExtra2(squares[currentId - 1 - width])}
+    if (currentId < (width*width-2) && !isRightEdge && squares[currentId + 1].classList.contains('bomb'))                 {addFlagExtra2(squares[currentId + 1])}
+    if (currentId < (width*width-width) && !isLeftEdge && squares[currentId - 1 + width].classList.contains('bomb'))      {addFlagExtra2(squares[currentId - 1 + width])}
+    if (currentId < (width*width-width-2) && !isRightEdge && squares[currentId + 1 + width].classList.contains('bomb'))   {addFlagExtra2(squares[currentId + 1 +width])}
+    if (currentId < (width*width-width-1) && squares[currentId + width].classList.contains('bomb'))                       {addFlagExtra2(squares[currentId + width])}
+  }
+  // addflags function for extra2
+  function addFlagExtra2(square) {
+    let currentId = square.id
+      if (!square.classList.contains('flag')) {
+        square.classList.add('flag')
+        square.innerHTML = ' 🚩'
+        //========================================
+        flagArr.push(currentId)
+        stackUndo.push(currentId)
+        console.log(flagArr)
+        //=========================================
+        flags++
+        flagsLeft.innerHTML = bombAmount - flags
+        checkForWin()
+      }
+  }
 });
