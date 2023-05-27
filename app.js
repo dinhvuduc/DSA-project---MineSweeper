@@ -318,4 +318,32 @@ document.addEventListener("DOMContentLoaded", () => {
         checkForWin()
       }
   }
+
+  // function Undo Flag
+  undo_flag.onclick = function UndoFlag() {
+    let searchkey = stackUndo.pop()
+    console.log(searchkey);
+    squares.forEach(square =>{
+      if(square.id == searchkey)
+      {
+        stackRedo.push(square.id)
+        flags--
+        flagsLeft.innerHTML = bombAmount - flags
+        square.innerHTML = ''
+      }
+    })
+    }
+  // redo flag function 
+  redo_flag.onclick = function RedoFlag(){
+    let searchkey = stackRedo.pop()
+    squares.forEach(square =>{
+      if(square.id == searchkey)
+      {
+        stackUndo.push(square.id)
+        flags++
+        flagsLeft.innerHTML = bombAmount - flags
+        square.innerHTML = '🚩'
+      }
+    })
+  }
 });
