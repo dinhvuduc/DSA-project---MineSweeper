@@ -346,4 +346,37 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   }
+
+  // checking level funcion 
+  check.onclick = function Click(){
+    let checkingLevel = document.getElementById('level').selectedIndex
+    console.log(checkingLevel)
+    switch (checkingLevel) {
+      case 0: 
+        width = 10
+        bombAmount = 20
+        let div = document.getElementById('game')
+        // div.classList.remove('medium','hard')
+        div.classList.add('easy')
+        createBoard()
+        break;
+      case 1:
+        width = 12
+        bombAmount = 30
+        let medium = document.getElementById('game')
+        // medium.classList.remove('easy','hard')
+
+        medium.classList.add('medium')
+        createBoard()
+        break;
+      case 2:
+        width = 13
+        bombAmount = 50
+        let hard = document.getElementById('game')
+        // hard.classList.remove('easy','medium')
+        hard.classList.add('hard')
+        createBoard()
+        break;
+    }
+  }
 });
