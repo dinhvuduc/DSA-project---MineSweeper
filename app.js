@@ -276,107 +276,152 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   // function extra 2
-  extra2.onclick = function extra2(){
-    if(timesExtra2 > 0){
-      checkingExtra2 = true
+  extra2.onclick = function extra2() {
+    if (timesExtra2 > 0) {
+      checkingExtra2 = true;
       console.log(checkingExtra2);
-      timesExtra2 -= 1
-    }else{
-      result.innerHTML = 'run out of times of Extra2'
+      timesExtra2 -= 1;
+    } else {
+      result.innerHTML = "run out of times of Extra2";
     }
-    
-  }
-  // click function for Extra 2 
+  };
+  // click function for Extra 2
   function clickExtra2(square) {
-    let currentId = parseInt(square.id)
-    const isLeftEdge = (currentId % width === 0)
-    const isRightEdge = (currentId % width === width - 1)
+    let currentId = parseInt(square.id);
+    const isLeftEdge = currentId % width === 0;
+    const isRightEdge = currentId % width === width - 1;
     console.log(currentId);
-    if (squares[currentId].classList.contains('bomb'))                                                                     {addFlagExtra2(squares[currentId])}
-    if (currentId > 0 && !isLeftEdge && squares[currentId - 1].classList.contains('bomb'))                                {addFlagExtra2(squares[currentId - 1])}
-    if (currentId > (width-1) && !isRightEdge && squares[currentId + 1 - width].classList.contains('bomb'))               {addFlagExtra2(squares[currentId + 1 - width])}
-    if (currentId > width && squares[currentId - width].classList.contains('bomb'))                                       {addFlagExtra2(squares[currentId - width])}
-    if (currentId > (width+1) && !isLeftEdge && squares[currentId - 1 - width].classList.contains('bomb'))                {addFlagExtra2(squares[currentId - 1 - width])}
-    if (currentId < (width*width-2) && !isRightEdge && squares[currentId + 1].classList.contains('bomb'))                 {addFlagExtra2(squares[currentId + 1])}
-    if (currentId < (width*width-width) && !isLeftEdge && squares[currentId - 1 + width].classList.contains('bomb'))      {addFlagExtra2(squares[currentId - 1 + width])}
-    if (currentId < (width*width-width-2) && !isRightEdge && squares[currentId + 1 + width].classList.contains('bomb'))   {addFlagExtra2(squares[currentId + 1 +width])}
-    if (currentId < (width*width-width-1) && squares[currentId + width].classList.contains('bomb'))                       {addFlagExtra2(squares[currentId + width])}
+    if (squares[currentId].classList.contains("bomb")) {
+      addFlagExtra2(squares[currentId]);
+    }
+    if (
+      currentId > 0 &&
+      !isLeftEdge &&
+      squares[currentId - 1].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId - 1]);
+    }
+    if (
+      currentId > width - 1 &&
+      !isRightEdge &&
+      squares[currentId + 1 - width].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId + 1 - width]);
+    }
+    if (
+      currentId > width &&
+      squares[currentId - width].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId - width]);
+    }
+    if (
+      currentId > width + 1 &&
+      !isLeftEdge &&
+      squares[currentId - 1 - width].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId - 1 - width]);
+    }
+    if (
+      currentId < width * width - 2 &&
+      !isRightEdge &&
+      squares[currentId + 1].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId + 1]);
+    }
+    if (
+      currentId < width * width - width &&
+      !isLeftEdge &&
+      squares[currentId - 1 + width].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId - 1 + width]);
+    }
+    if (
+      currentId < width * width - width - 2 &&
+      !isRightEdge &&
+      squares[currentId + 1 + width].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId + 1 + width]);
+    }
+    if (
+      currentId < width * width - width - 1 &&
+      squares[currentId + width].classList.contains("bomb")
+    ) {
+      addFlagExtra2(squares[currentId + width]);
+    }
   }
   // addflags function for extra2
   function addFlagExtra2(square) {
-    let currentId = square.id
-      if (!square.classList.contains('flag')) {
-        square.classList.add('flag')
-        square.innerHTML = ' 🚩'
-        //========================================
-        flagArr.push(currentId)
-        stackUndo.push(currentId)
-        console.log(flagArr)
-        //=========================================
-        flags++
-        flagsLeft.innerHTML = bombAmount - flags
-        checkForWin()
-      }
+    let currentId = square.id;
+    if (!square.classList.contains("flag")) {
+      square.classList.add("flag");
+      square.innerHTML = " 🚩";
+      //========================================
+      flagArr.push(currentId);
+      stackUndo.push(currentId);
+      console.log(flagArr);
+      //=========================================
+      flags++;
+      flagsLeft.innerHTML = bombAmount - flags;
+      checkForWin();
+    }
   }
 
   // function Undo Flag
   undo_flag.onclick = function UndoFlag() {
-    let searchkey = stackUndo.pop()
+    let searchkey = stackUndo.pop();
     console.log(searchkey);
-    squares.forEach(square =>{
-      if(square.id == searchkey)
-      {
-        stackRedo.push(square.id)
-        flags--
-        flagsLeft.innerHTML = bombAmount - flags
-        square.innerHTML = ''
+    squares.forEach((square) => {
+      if (square.id == searchkey) {
+        stackRedo.push(square.id);
+        flags--;
+        flagsLeft.innerHTML = bombAmount - flags;
+        square.innerHTML = "";
       }
-    })
-    }
-  // redo flag function 
-  redo_flag.onclick = function RedoFlag(){
-    let searchkey = stackRedo.pop()
-    squares.forEach(square =>{
-      if(square.id == searchkey)
-      {
-        stackUndo.push(square.id)
-        flags++
-        flagsLeft.innerHTML = bombAmount - flags
-        square.innerHTML = '🚩'
+    });
+  };
+  // redo flag function
+  redo_flag.onclick = function RedoFlag() {
+    let searchkey = stackRedo.pop();
+    squares.forEach((square) => {
+      if (square.id == searchkey) {
+        stackUndo.push(square.id);
+        flags++;
+        flagsLeft.innerHTML = bombAmount - flags;
+        square.innerHTML = "🚩";
       }
-    })
-  }
+    });
+  };
 
-  // checking level funcion 
-  check.onclick = function Click(){
-    let checkingLevel = document.getElementById('level').selectedIndex
-    console.log(checkingLevel)
+  // checking level funcion
+  check.onclick = function Click() {
+    let checkingLevel = document.getElementById("level").selectedIndex;
+    console.log(checkingLevel);
     switch (checkingLevel) {
-      case 0: 
-        width = 10
-        bombAmount = 20
-        let div = document.getElementById('game')
+      case 0:
+        width = 10;
+        bombAmount = 20;
+        let div = document.getElementById("game");
         // div.classList.remove('medium','hard')
-        div.classList.add('easy')
-        createBoard()
+        div.classList.add("easy");
+        createBoard();
         break;
       case 1:
-        width = 12
-        bombAmount = 30
-        let medium = document.getElementById('game')
+        width = 12;
+        bombAmount = 30;
+        let medium = document.getElementById("game");
         // medium.classList.remove('easy','hard')
 
-        medium.classList.add('medium')
-        createBoard()
+        medium.classList.add("medium");
+        createBoard();
         break;
       case 2:
-        width = 13
-        bombAmount = 50
-        let hard = document.getElementById('game')
+        width = 13;
+        bombAmount = 50;
+        let hard = document.getElementById("game");
         // hard.classList.remove('easy','medium')
-        hard.classList.add('hard')
-        createBoard()
+        hard.classList.add("hard");
+        createBoard();
         break;
     }
-  }
+  };
 });
