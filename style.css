@@ -16,6 +16,7 @@
   height: 520px !important;
   width: 520px !important;
 }
+
 body {
   background-image: url("image.png");
   background-size: auto;
@@ -92,13 +93,8 @@ div {
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:300");
 
-/* body {
-  background: #111;
-} */
-
 button,
 select {
-  /* position: absolute; */
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -120,7 +116,7 @@ select {
 
 button:before {
   content: "";
-  /* display: block; */
+  display: block;
   position: absolute;
   background: rgba(255, 255, 255, 0.5);
   width: 60px;
@@ -165,5 +161,5 @@ button:hover:after {
 
 #level,
 #check {
-  margin-top: 15px;
+  margin-top: 25px;
 }
