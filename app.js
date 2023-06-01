@@ -100,6 +100,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   createBoard();
 
+
+
+
+  
   //add Flag with right click
   function addFlag(square) {
     let currentId = square.id;
